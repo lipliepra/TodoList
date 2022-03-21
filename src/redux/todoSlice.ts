@@ -5,7 +5,8 @@ interface ITodo {
   id: string;
   title: string;
   description: string;
-  completed: boolean;
+  isImportant: boolean;
+  isComplete: boolean;
 }
 
 const initialState: ITodo[] = [];
@@ -23,29 +24,29 @@ const todoSlice = createSlice({
           id: uuidv4(),
           title,
           description,
-          completed: false,
+          isImportant: false,
+          isComplete: false,
         } as ITodo,
       }),
     },
-      deleteTodo(state, action: PayloadAction<{ id: string }>) {
-        console.log(state);
-        
-      state.filter((todo) => todo.id !== action.payload.id);
 
-    //   console.log(index);
-    //   state!.splice(index)
+    setComplete(state, action: PayloadAction<{ id: string; comp: boolean }>) {
+      const todo = state.find((todo) => todo.id === action.payload.id);
+      todo!.isComplete = !action.payload.comp;
     },
-    changeComplete(
-      state,
-      action: PayloadAction<{ completed: boolean; id: string }>
-    ) {
-      const updatedTodo = state.find((todo) => todo.id === action.payload.id);
-      console.log(updatedTodo);
 
-      updatedTodo!.completed = action.payload.completed;
+    setImportant(state, action: PayloadAction<{ id: string; imp: boolean }>) {
+      const todo = state.find((todo) => todo.id === action.payload.id);
+      todo!.isImportant = !action.payload.imp;
+    },
+
+    deleteTodo(state, action: PayloadAction<{ id: string }>) {
+      const todo = state.findIndex((todo) => todo.id !== action.payload.id);
+      state.splice(todo);
     },
   },
 });
 
-export const { addTodo, deleteTodo, changeComplete } = todoSlice.actions;
+export const { addTodo, setComplete, setImportant, deleteTodo } =
+  todoSlice.actions;
 export default todoSlice.reducer;

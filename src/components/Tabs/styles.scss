@@ -1,0 +1,20 @@
+.tabs {
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+
+  &__button {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #828282;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &-active {
+      background-color: rgb(75, 75, 255);
+      color: #fff;
+    }
+  }
+}

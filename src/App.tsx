@@ -1,32 +1,45 @@
-import React, { useState } from "react";
-import { AccessAlarm, ThreeDRotation, PriorityHigh } from "@mui/icons-material";
+import React from "react";
+
+import Header from "./components/Header";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
 // Other Imports
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { addTodo, deleteTodo, changeComplete } from "./redux/todoSlice";
+import {
+  addTodo,
+  setComplete,
+  setImportant,
+  deleteTodo,
+} from "./redux/todoSlice";
 
-function App() {
-  //React Hooks
-  const [title, setTitle] = useState("fdvd");
-  const [description, setDescription] = useState("");
-
-  //React Redux Hooks
+const App: React.FC = () => {
   const todoList = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const addTodoHandler = () => {
-    if (title.length && description.length) {
-      console.log("djhfvnjj");
-      dispatch(addTodo(title, description));
-      setDescription("");
-    }
-  };
-
-  //Rendering
   return (
-    <div>
-      <AccessAlarm />
-      <PriorityHigh />
+    <div className="App">
+      <Header />
+
+      <div className="container">
+        <AddTodo
+          addTodo={(title, description) => {
+            dispatch(addTodo(title, description));
+          }}
+        />
+        <TodoList
+          list={todoList}
+          setImportant={(id, imp) => {
+            dispatch(setImportant({ id, imp }));
+          }}
+          setComplete={(id, comp) => {
+            dispatch(setComplete({ id, comp }));
+          }}
+          setDelete={(id) => {
+            dispatch(deleteTodo({ id }));
+          }}
+        />
+      </div>
     </div>
     // <Container maxWidth="xs">
     //   <Typography style={{ textAlign: "center" }} variant="h3">
@@ -89,7 +102,7 @@ function App() {
     //   </List>
     // </Container>
   );
-}
+};
 
 export default App;
 

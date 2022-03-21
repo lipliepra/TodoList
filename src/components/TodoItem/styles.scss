@@ -1,0 +1,52 @@
+.todoItem {
+  padding: 10px;
+  border: 2px solid #828282;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__important {
+    border: 2px solid rgb(255, 65, 65);
+    .todoItem__text {
+      &-desc,
+      &-title {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__complete {
+    border: 2px solid rgb(75, 75, 255);
+    .todoItem__text {
+      &-desc,
+      &-title {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    &-title {
+      font-size: 36px;
+    }
+
+    &-desc {
+      font-size: 20px;
+      text-align: justify;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      padding: 2px 7px;
+    }
+  }
+}
