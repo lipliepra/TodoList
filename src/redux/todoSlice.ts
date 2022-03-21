@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 
 interface ITodo {
   id: string;
-  text: string;
+  title: string;
+  description: string;
   completed: boolean;
 }
 
@@ -17,10 +18,11 @@ const todoSlice = createSlice({
       reducer: (state, action: PayloadAction<ITodo>) => {
         state.push(action.payload);
       },
-      prepare: (text: string) => ({
+      prepare: (title: string, description: string) => ({
         payload: {
           id: uuidv4(),
-          text,
+          title,
+          description,
           completed: false,
         } as ITodo,
       }),
@@ -28,20 +30,22 @@ const todoSlice = createSlice({
       deleteTodo(state, action: PayloadAction<{ id: string }>) {
         console.log(state);
         
-        const index = state.find((todo) => todo.id === action.payload.id);
-        console.log(index);
-        
-    //   state.splice(index, 1);
+      state.filter((todo) => todo.id !== action.payload.id);
+
+    //   console.log(index);
+    //   state!.splice(index)
     },
-    changeStatus(
+    changeComplete(
       state,
       action: PayloadAction<{ completed: boolean; id: string }>
     ) {
       const updatedTodo = state.find((todo) => todo.id === action.payload.id);
+      console.log(updatedTodo);
+
       updatedTodo!.completed = action.payload.completed;
     },
   },
 });
 
-export const { addTodo, deleteTodo, changeStatus } = todoSlice.actions;
+export const { addTodo, deleteTodo, changeComplete } = todoSlice.actions;
 export default todoSlice.reducer;

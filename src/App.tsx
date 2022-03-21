@@ -1,85 +1,93 @@
 import React, { useState } from "react";
-// Material-UI Imports
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { AccessAlarm, ThreeDRotation, PriorityHigh } from "@mui/icons-material";
 // Other Imports
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { addTodo, deleteTodo, changeStatus } from "./redux/todoSlice";
+import { addTodo, deleteTodo, changeComplete } from "./redux/todoSlice";
 
 function App() {
   //React Hooks
-  const [todoDescription, setTodoDescription] = useState("");
+  const [title, setTitle] = useState("fdvd");
+  const [description, setDescription] = useState("");
 
   //React Redux Hooks
   const todoList = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
+  const addTodoHandler = () => {
+    if (title.length && description.length) {
+      console.log("djhfvnjj");
+      dispatch(addTodo(title, description));
+      setDescription("");
+    }
+  };
+
   //Rendering
   return (
-    <Container maxWidth="xs">
-      <Typography style={{ textAlign: "center" }} variant="h3">
-        Redux List App
-      </Typography>
-      <TextField
-        variant="outlined"
-        label="To Do Item"
-        fullWidth
-        onChange={(e) => setTodoDescription(e.target.value)}
-        value={todoDescription}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        onClick={() => {
-          dispatch(addTodo(todoDescription));
-          setTodoDescription("");
-        }}
-      >
-        Add Item
-      </Button>
-      <List>
-        {todoList.map((todo) => (
-          <ListItem key={todo.id}>
-            <ListItemText
-              style={{
-                textDecoration: todo.completed ? "line-through" : "none",
-              }}
-            >
-              {todo.text}
-            </ListItemText>
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => {
-                  dispatch(deleteTodo({ id: todo.id }));
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-              <Checkbox
-                edge="end"
-                value={todo.completed}
-                onChange={() => {
-                  dispatch(
-                    changeStatus({ completed: !todo.completed, id: todo.id })
-                  );
-                }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-    </Container>
+    <div>
+      <AccessAlarm />
+      <PriorityHigh />
+    </div>
+    // <Container maxWidth="xs">
+    //   <Typography style={{ textAlign: "center" }} variant="h3">
+    //     Redux List App
+    //   </Typography>
+    //   <TextField
+    //     variant="outlined"
+    //     label="To Do Item"
+    //     fullWidth
+    //     onChange={(e) => setTitle(e.target.value)}
+    //     value={title}
+    //   />
+    //   <TextField
+    //     variant="outlined"
+    //     label="To Do Item"
+    //     fullWidth
+    //     onChange={(e) => setDescription(e.target.value)}
+    //     value={description}
+    //   />
+    //   <Button
+    //     variant="contained"
+    //     color="primary"
+    //     fullWidth
+    //     onClick={addTodoHandler}
+    //   >
+    //     Add Item
+    //   </Button>
+    //   <List>
+    //     {todoList.map((todo) => (
+    //       <ListItem key={todo.id}>
+    //         <ListItemText
+    //           style={{
+    //             textDecoration: todo.completed ? "line-through" : "none",
+    //           }}
+    //         >
+    //           {todo.title}
+    //           {todo.description}
+    //         </ListItemText>
+    //         {/* <ListItemSecondaryAction> */}
+    //         <IconButton
+    //           onClick={() => {
+    //             dispatch(deleteTodo({ id: todo.id }));
+    //           }}
+    //         >
+    //           <DeleteIcon />
+    //           <PriorityHighIcon />
+    //         </IconButton>
+    //         <Checkbox
+    //           edge="end"
+    //           value={todo.completed}
+    //           onChange={() => {
+    //             dispatch(
+    //               changeComplete({ completed: !todo.completed, id: todo.id })
+    //             );
+    //           }}
+    //         />
+    //         {/* </ListItemSecondaryAction> */}
+    //       </ListItem>
+    //     ))}
+    //   </List>
+    // </Container>
   );
 }
 
