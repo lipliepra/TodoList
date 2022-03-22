@@ -4,37 +4,36 @@ import { IAddTodoProps } from "./types";
 import "./styles.scss";
 
 const AddTodo: React.FC<IAddTodoProps> = ({ addTodo }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [message, setMessage] = useState("");
+  const [description, setDescription] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const addTodoHandler = () => {
-    if (title.length && description.length) {
-      addTodo(title, description);
-      setTitle("");
+    if (description) {
+      addTodo(description);
       setDescription("");
       setMessage("");
     } else {
-      setMessage("Add title or description");
+      setMessage("Add description");
     }
   };
 
   return (
     <div className="addTodo">
-      <h2>Add Todo</h2>
-      <input
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <input
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <button onClick={addTodoHandler}>Add</button>
+      <h2 className="addTodo__title">Add Todo</h2>
+      <div className="addTodo__form">
+        <span>Description</span>
+        <input
+          className="addTodo__input"
+          value={description}
+          placeholder="Add description..."
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+      </div>
+      <button className="addTodo__button" onClick={addTodoHandler}>
+        Add
+      </button>
       {message && <p>{message}</p>}
     </div>
   );

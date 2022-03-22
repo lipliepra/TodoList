@@ -28,7 +28,7 @@ html {
 }
 
 body {
-  font-family: "Gilroy";
+  font-family: $font-family-main;
   font-size: $font-size-small;
   line-height: 1.4;
   color: $color-black-1;
@@ -37,20 +37,17 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   flex: 1 1 auto;
   padding: 60px 20px 40px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
   position: relative;
-}
 
-@media (max-width: 767px) {
-  .container {
-    padding: 40px 20px;
+  &__right {
+    width: 100%;
   }
 }
 

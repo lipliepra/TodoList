@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: "Gilroy";
+  font-family: "Gilroy-Bold";
   src: local("Gilroy Bold"), local("Gilroy-Bold"),
     url("../assets/fonts/Gilroy/Gilroy-Bold.woff2") format("woff2"),
     url("../assets/fonts/Gilroy/Gilroy-Bold.woff") format("woff"),
@@ -17,3 +17,6 @@
   font-weight: 700;
   font-style: normal;
 }
+
+$font-family-main: "Gilroy";
+$font-family-main-bold: "Gilroy-Bold";

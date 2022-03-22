@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import cn from "classnames";
 
 import { ITabsProps } from "./types";
 import "./styles.scss";
 
-const Tabs: React.FC<ITabsProps> = ({ tabs }) => {
-  const [currentTab, setCurrentTab] = useState("All");
+const Tabs: React.FC<ITabsProps> = ({ tabs, currentType, onClick }) => {
   return (
     <div className="tabs">
       {tabs.map((tab, idx) => {
-        const { text, onClick } = tab;
-        const isCurrentType = currentTab === text;
+        const { text, value } = tab;
+        const isCurrentType = currentType === value;
         return (
           <button
             key={idx}
@@ -19,8 +18,7 @@ const Tabs: React.FC<ITabsProps> = ({ tabs }) => {
               isCurrentType && "tabs__button-active"
             )}
             onClick={() => {
-              onClick();
-              setCurrentTab(text);
+              onClick(value);
             }}
           >
             {text}

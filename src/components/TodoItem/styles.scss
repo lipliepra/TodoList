@@ -1,6 +1,7 @@
 .todoItem {
   padding: 10px;
-  border: 2px solid #828282;
+  border: 2px solid #f4f4f4;
+  background-color: #f4f4f4;
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
@@ -9,9 +10,8 @@
   &__important {
     border: 2px solid rgb(255, 65, 65);
     .todoItem__text {
-      &-desc,
       &-title {
-        text-decoration: underline;
+        color: rgb(255, 65, 65);
       }
     }
   }
@@ -19,8 +19,11 @@
   &__complete {
     border: 2px solid rgb(75, 75, 255);
     .todoItem__text {
-      &-desc,
       &-title {
+        color: rgb(75, 75, 255);
+      }
+
+      &-desc {
         text-decoration: line-through;
       }
     }
