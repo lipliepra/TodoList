@@ -1,7 +1,7 @@
 export type ITabsProps = {
   tabs: ITab[];
   currentType: string;
-  onClick: (value: string) => void;
+  setType: (value: string) => void;
 };
 
 interface ITab {
