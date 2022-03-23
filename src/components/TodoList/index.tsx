@@ -15,23 +15,25 @@ const TodoList: React.FC<ITodoListProps> = ({
 }) => {
   return (
     <div className={cn("todoList", !sort && "todoList__reverse")}>
-      {list.map((item, idx) => {
-        return (
-          <TodoItem
-            key={idx}
-            item={item}
-            setImportant={(id, imp) => {
-              setImportant(id, imp);
-            }}
-            setComplete={(id, comp) => {
-              setComplete(id, comp);
-            }}
-            setDelete={(id) => {
-              setDelete(id);
-            }}
-          />
-        );
-      })}
+      {!!list.length
+        ? list.map((item, idx) => {
+            return (
+              <TodoItem
+                key={idx}
+                item={item}
+                setImportant={(id, imp) => {
+                  setImportant(id, imp);
+                }}
+                setComplete={(id, comp) => {
+                  setComplete(id, comp);
+                }}
+                setDelete={(id) => {
+                  setDelete(id);
+                }}
+              />
+            );
+          })
+        : <p>Not found..</p>}
     </div>
   );
 };
