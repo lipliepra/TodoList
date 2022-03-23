@@ -28,29 +28,32 @@ const TodoItem: React.FC<ITodoItemProps> = ({
       </div>
       <div className="todoItem__buttons">
         <button
+          title="set important"
           className="todoItem__buttons-important"
           onClick={() => {
             setImportant(id, isImportant);
           }}
           disabled={isComplete}
         >
-          <PriorityHigh />
+          <PriorityHigh fontSize="small" />
         </button>
         <button
+          title="set complete"
           className="todoItem__buttons-complete"
           onClick={() => {
             setComplete(id, isComplete);
           }}
         >
-          <Done />
+          <Done fontSize="small" />
         </button>
         <button
+          title="delete"
           className="todoItem__buttons-delete"
           onClick={() => {
             setDelete(id);
           }}
         >
-          <Delete />
+          <Delete fontSize="small" />
         </button>
       </div>
     </div>

@@ -1,26 +1,33 @@
+@import "../../scss/vars.scss";
+
 .todoItem {
   padding: 10px;
-  border: 2px solid #f4f4f4;
-  background-color: #f4f4f4;
+  border: 2px solid $color-grey-1;
+  background-color: $color-grey-1;
+  box-shadow: $box-shadow-1;
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 
   &__important {
-    border: 2px solid rgb(255, 65, 65);
+    border-color: $color-red-1;
+    box-shadow: none;
+
     .todoItem__text {
       &-title {
-        color: rgb(255, 65, 65);
+        color: $color-red-1;
       }
     }
   }
 
   &__complete {
-    border: 2px solid rgb(75, 75, 255);
+    border-color: $color-blue-1;
+    box-shadow: none;
+
     .todoItem__text {
       &-title {
-        color: rgb(75, 75, 255);
+        color: $color-blue-1;
       }
 
       &-desc {
@@ -32,15 +39,15 @@
   &__text {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     margin-bottom: 20px;
 
     &-title {
-      font-size: 36px;
+      font-size: $font-size-medium;
     }
 
     &-desc {
-      font-size: 20px;
-      text-align: justify;
+      font-size: $font-size-normal;
     }
   }
 
@@ -49,7 +56,15 @@
     gap: 8px;
 
     button {
-      padding: 2px 7px;
+      width: 32px;
+      height: 32px;
+      background-color: $color-white-1;
+      border: 1px solid $color-grey-2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 }
