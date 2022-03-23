@@ -43,13 +43,9 @@ const todoSlice = createSlice({
     },
 
     deleteAllCompletedTodos(state) {
-      for (let i = 0; i < state.length; i++) {
-        if (state[i].isComplete === true) {
-          state.splice(i);
-        }
-      }
+      const filteredList = state.filter((todo) => todo.isComplete === !true)
 
-      return state;
+      return filteredList;
     },
   },
 });
