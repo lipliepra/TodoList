@@ -3,7 +3,7 @@ import React from "react";
 import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
-import Tabs from "./components/Tabs";
+import FilterGroup from "./components/FilterGroup";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
@@ -53,6 +53,7 @@ const App: React.FC = () => {
   };
 
   const setFilterHandler = (value: string) => dispatch(setFilterType(value));
+  const setSortHandler = (value: boolean) => dispatch(setSortType(value));
 
   const setImportantHandler = (id: string, imp: boolean) => {
     dispatch(setImportant({ id, imp }));
@@ -75,9 +76,16 @@ const App: React.FC = () => {
       <div className="container">
         <AddTodo addTodo={addTodoHandler} />
         <div className="container__right">
-          <Tabs tabs={tabs} currentType={filter} onClick={setFilterHandler} />
+          <FilterGroup
+            tabs={tabs}
+            currentType={filter}
+            setType={setFilterHandler}
+            sort={sort}
+            setSort={setSortHandler}
+          />
           <TodoList
             list={list}
+            sort={sort}
             setImportant={setImportantHandler}
             setComplete={setCompleteHandler}
             setDelete={deleteHandler}

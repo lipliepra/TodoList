@@ -1,0 +1,23 @@
+.sort {
+  display: flex;
+  gap: 4px;
+
+  &__button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #828282;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &-active {
+      background-color: rgb(75, 75, 255);
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}
