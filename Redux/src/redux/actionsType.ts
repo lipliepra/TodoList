@@ -1,18 +1,48 @@
-export const ADD_TODO = "todos/add";
-
 export enum ActionsType {
+  // sort
   TOGGLE_SORT = "TOGGLE_SORT",
+  // filter
   TOGGLE_FILTER = "TOGGLE_FILTER",
+  // todos
+  ADD_TODO = "ADD_TODO",
+  DELETE_TODO = "DELETE_TODO",
+  DELETE_COMPLETED_TODOS = "DELETE_COMPLETED_TODOS",
+  SET_IMPORTANT = "SET_IMPORTANT",
+  SET_COMPLETE = "SET_COMPLETE",
 }
 
-export interface ISortAction {
-  type: string;
-  payload: boolean;
-}
+export type SortFilterAction = {
+  type: ActionsType.TOGGLE_SORT | ActionsType.TOGGLE_FILTER;
+  payload: string | boolean;
+};
 
-export interface IFilterAction {
-  type: string;
+interface AddTodoAction {
+  type: ActionsType.ADD_TODO;
   payload: string;
 }
 
-export type Action = ISortAction | IFilterAction;
+interface DeleteTodoAction {
+  type: ActionsType.DELETE_TODO;
+  payload: { id: string };
+}
+
+interface DeleteCompletedTodosAction {
+  type: ActionsType.DELETE_COMPLETED_TODOS;
+}
+
+interface SetImportantAction {
+  type: ActionsType.SET_IMPORTANT;
+  payload: { id: string; comp: boolean };
+}
+
+interface SetCompleteAction {
+  type: ActionsType.SET_COMPLETE;
+  payload: { id: string; comp: boolean };
+}
+
+export type TodosAction =
+  | AddTodoAction
+  | DeleteTodoAction
+  | DeleteCompletedTodosAction
+  | SetImportantAction
+  | SetCompleteAction;

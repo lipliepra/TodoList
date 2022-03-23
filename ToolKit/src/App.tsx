@@ -93,10 +93,6 @@ const App: React.FC = () => {
           />
           {filter === "completed" && list.length > 0 && (
             <DeleteTodos onClick={deleteAllCompletedTodosHandler} />
-            // <div>
-            //   <span>Delete all completed todos?</span>
-            //   <button onClick={deleteAllCompletedTodosHandler}>Delete</button>
-            // </div>
           )}
         </div>
       </div>

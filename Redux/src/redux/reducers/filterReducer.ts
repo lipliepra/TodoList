@@ -1,8 +1,8 @@
-import { Action, ActionsType } from "../actionsType";
+import { SortFilterAction, ActionsType } from "../actionsType";
 
 const initialState: string = "all";
 
-const filterReducer = (state = initialState, action: Action) => {
+const filterReducer = (state = initialState, action: SortFilterAction) => {
   const { type, payload } = action;
 
   switch (type) {
