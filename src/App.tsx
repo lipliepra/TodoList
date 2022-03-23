@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import FilterGroup from "./components/FilterGroup";
+import DeleteTodos from "./components/DeleteTodos";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./store";
@@ -90,11 +91,12 @@ const App: React.FC = () => {
             setComplete={setCompleteHandler}
             setDelete={deleteHandler}
           />
-          {filter === "completed" && (
-            <div>
-              <span>Delete all completed todos?</span>
-              <button onClick={deleteAllCompletedTodosHandler}>Delete</button>
-            </div>
+          {filter === "completed" && list.length > 0 && (
+            <DeleteTodos onClick={deleteAllCompletedTodosHandler} />
+            // <div>
+            //   <span>Delete all completed todos?</span>
+            //   <button onClick={deleteAllCompletedTodosHandler}>Delete</button>
+            // </div>
           )}
         </div>
       </div>
