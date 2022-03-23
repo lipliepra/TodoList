@@ -4,7 +4,7 @@ import cn from "classnames";
 import { ITabsProps } from "./types";
 import "./styles.scss";
 
-const Tabs: React.FC<ITabsProps> = ({ tabs, currentType, onClick }) => {
+const Tabs: React.FC<ITabsProps> = ({ tabs, currentType, setType }) => {
   return (
     <div className="tabs">
       {tabs.map((tab, idx) => {
@@ -18,7 +18,7 @@ const Tabs: React.FC<ITabsProps> = ({ tabs, currentType, onClick }) => {
               isCurrentType && "tabs__button-active"
             )}
             onClick={() => {
-              onClick(value);
+              setType(value);
             }}
           >
             {text}
