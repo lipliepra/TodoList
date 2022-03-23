@@ -1,16 +1,16 @@
 import { Action, ActionsType } from "../actionsType";
 
-const initialState: boolean = true;
+const initialState: string = "all";
 
-const sortReducer = (state = initialState, action: Action) => {
+const filterReducer = (state = initialState, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ActionsType.TOGGLE_SORT:
+    case ActionsType.TOGGLE_FILTER:
       return payload;
     default:
       return state;
   }
 };
 
-export default sortReducer;
+export default filterReducer;

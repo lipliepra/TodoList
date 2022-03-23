@@ -8,7 +8,7 @@ import TodoList from "./components/TodoList";
 import FilterGroup from "./components/FilterGroup";
 import DeleteTodos from "./components/DeleteTodos";
 
-import { toogleSort } from "./redux/actions";
+import { toggleSort, toggleFilter } from "./redux/actions";
 
 import { tabs } from "./helpers/tabs";
 
@@ -16,14 +16,16 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
 
   const sort = useSelector((state: RootState) => state.sort);
+  const filter = useSelector((state: RootState) => state.filter);
 
-  const setSortHandler = (value: boolean) => dispatch(toogleSort(value));
+  const setSortHandler = (value: boolean) => dispatch(toggleSort(value));
+  const setFilterHandler = (value: string) => dispatch(toggleFilter(value));
 
   return (
     <div className="App">
       <Header />
       <div className="container">
-        <FilterGroup tabs={tabs} currentType={"all"} setType={() => {}} sort={sort} setSort={setSortHandler} />
+        <FilterGroup tabs={tabs} currentType={filter} setType={setFilterHandler} sort={sort} setSort={setSortHandler} />
       </div>
     </div>
   );
