@@ -34,7 +34,7 @@ const AddTodo: React.FC<IAddTodoProps> = ({ addTodo }) => {
       <button className="addTodo__button" onClick={addTodoHandler}>
         Add
       </button>
-      {message && <p>{message}</p>}
+      <p className="addTodo__message">{message}</p>
     </div>
   );
 };
