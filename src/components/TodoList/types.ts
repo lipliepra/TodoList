@@ -1,5 +1,6 @@
 export type ITodoListProps = {
   list: ITodoItem[];
+  sort: boolean;
   setImportant: (id: string, imp: boolean) => void;
   setComplete: (id: string, comp: boolean) => void;
   setDelete: (id: string) => void;

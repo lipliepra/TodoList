@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "classnames";
 
 import TodoItem from "../TodoItem";
 
@@ -7,12 +8,13 @@ import "./styles.scss";
 
 const TodoList: React.FC<ITodoListProps> = ({
   list,
+  sort,
   setImportant,
   setComplete,
   setDelete,
 }) => {
   return (
-    <div className="todoList">
+    <div className={cn("todoList", !sort && "todoList__reverse")}>
       {list.map((item, idx) => {
         return (
           <TodoItem
