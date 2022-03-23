@@ -1,0 +1,15 @@
+@import "../../scss/vars.scss";
+
+.header {
+  background-color: $color-blue-1;
+  padding: 20px 0;
+
+  .container {
+    padding: 0 20px;
+  }
+
+  h1 {
+    font-size: $font-size-medium;
+    color: $color-white-1;
+  }
+}
