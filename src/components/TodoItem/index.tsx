@@ -12,7 +12,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({
   setComplete,
   setDelete,
 }) => {
-  const { id, title, description, isImportant, isComplete } = item;
+  const { id, number, description, isImportant, isComplete } = item;
 
   return (
     <div
@@ -23,7 +23,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({
       )}
     >
       <div className="todoItem__text">
-        <h3 className="todoItem__text-title">{title}</h3>
+        <h3 className="todoItem__text-title">{number}</h3>
         <span className="todoItem__text-desc">{description}</span>
       </div>
       <div className="todoItem__buttons">

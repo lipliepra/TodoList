@@ -7,7 +7,7 @@ export type ITodoListProps = {
 
 interface ITodoItem {
   id: string;
-  title: string;
+  number: string;
   description: string;
   isImportant: boolean;
   isComplete: boolean;

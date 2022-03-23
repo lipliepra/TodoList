@@ -6,36 +6,37 @@ import TodoList from "./components/TodoList";
 import Tabs from "./components/Tabs";
 
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./redux/store";
+import { AppDispatch, RootState } from "./store";
 import {
   addTodo,
   setComplete,
   setImportant,
   deleteTodo,
+  deleteAllCompletedTodos,
 } from "./redux/todoSlice";
 import { setFilterType } from "./redux/filterSlice";
+import { setSortType } from "./redux/sortSlice";
+
+import { tabs } from "./helpers/tabs";
+import { ITodo } from "./types";
 
 const App: React.FC = () => {
   const todoList = useSelector((state: RootState) => state.todo);
   const filter = useSelector((state: RootState) => state.filter);
   const sort = useSelector((state: RootState) => state.sort);
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const tabs = [
-    { text: "All", value: "all" },
-    { text: "Active", value: "active" },
-    { text: "Important", value: "important" },
-    { text: "Completed", value: "completed" },
-  ];
-
-  let list: any = [];
+  let list: ITodo[] = [];
 
   switch (filter) {
     case "all":
       list = todoList;
       break;
-    case "active":
-      list = todoList.filter((todo) => todo.isComplete === false);
+    case "common":
+      list = todoList.filter(
+        (todo) => todo.isComplete === false && todo.isImportant === false
+      );
       break;
     case "completed":
       list = todoList.filter((todo) => todo.isComplete === true);
@@ -63,6 +64,11 @@ const App: React.FC = () => {
 
   const deleteHandler = (id: string) => dispatch(deleteTodo({ id }));
 
+  const deleteAllCompletedTodosHandler = () => {
+    dispatch(deleteAllCompletedTodos());
+    dispatch(setFilterType("all"));
+  };
+
   return (
     <div className="App">
       <Header />
@@ -76,6 +82,12 @@ const App: React.FC = () => {
             setComplete={setCompleteHandler}
             setDelete={deleteHandler}
           />
+          {filter === "completed" && (
+            <div>
+              <span>Delete all completed todos?</span>
+              <button onClick={deleteAllCompletedTodosHandler}>Delete</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
