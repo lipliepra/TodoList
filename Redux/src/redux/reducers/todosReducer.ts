@@ -17,8 +17,27 @@ const todosReducer = (state = initialState, action: TodosAction) => {
         isImportant: false,
         isComplete: false,
       };
-
       return [...state, newTodo];
+
+    case ActionsType.DELETE_TODO:
+      const todos = state.filter((todo) => todo.id !== action.payload.id);
+      return todos;
+
+    case ActionsType.DELETE_COMPLETED_TODOS:
+      const filteredTodos = state.filter((todo) => todo.isComplete === false);
+      return filteredTodos;
+
+    case ActionsType.SET_IMPORTANT:
+      const isImptodo = state.find((todo) => todo.id === action.payload.id);
+      isImptodo!.isImportant = !isImptodo!.isImportant;
+      return [...state];
+
+    case ActionsType.SET_COMPLETE:
+      const isComptodo = state.find((todo) => todo.id === action.payload.id);
+      isComptodo!.isComplete = !isComptodo!.isComplete;
+      
+      return [...state];
+
     default:
       return state;
   }

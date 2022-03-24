@@ -50,6 +50,15 @@ body {
     flex-direction: column;
     gap: 20px;
   }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.loading {
+  padding-top: 20px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

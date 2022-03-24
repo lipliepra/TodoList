@@ -3,6 +3,8 @@ export enum ActionsType {
   TOGGLE_SORT = "TOGGLE_SORT",
   // filter
   TOGGLE_FILTER = "TOGGLE_FILTER",
+  //loading
+  TOGGLE_LOADING = "TOGGLE_LOADING",
   // todos
   ADD_TODO = "ADD_TODO",
   DELETE_TODO = "DELETE_TODO",
@@ -14,6 +16,11 @@ export enum ActionsType {
 export type SortFilterAction = {
   type: ActionsType.TOGGLE_SORT | ActionsType.TOGGLE_FILTER;
   payload: string | boolean;
+};
+
+export type LoadingAction = {
+  type: ActionsType.TOGGLE_LOADING;
+  payload: boolean;
 };
 
 interface AddTodoAction {
@@ -32,12 +39,12 @@ interface DeleteCompletedTodosAction {
 
 interface SetImportantAction {
   type: ActionsType.SET_IMPORTANT;
-  payload: { id: string; comp: boolean };
+  payload: { id: string };
 }
 
 interface SetCompleteAction {
   type: ActionsType.SET_COMPLETE;
-  payload: { id: string; comp: boolean };
+  payload: { id: string };
 }
 
 export type TodosAction =
