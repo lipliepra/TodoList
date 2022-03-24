@@ -1,0 +1,70 @@
+@import "../../scss/vars.scss";
+
+.todoItem {
+  padding: 10px;
+  border: 2px solid $color-grey-1;
+  background-color: $color-grey-1;
+  box-shadow: $box-shadow-1;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &__important {
+    border-color: $color-red-1;
+    box-shadow: none;
+
+    .todoItem__text {
+      &-title {
+        color: $color-red-1;
+      }
+    }
+  }
+
+  &__complete {
+    border-color: $color-blue-1;
+    box-shadow: none;
+
+    .todoItem__text {
+      &-title {
+        color: $color-blue-1;
+      }
+
+      &-desc {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    &-title {
+      font-size: $font-size-medium;
+    }
+
+    &-desc {
+      font-size: $font-size-normal;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      width: 32px;
+      height: 32px;
+      background-color: $color-white-1;
+      border: 1px solid $color-grey-2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}

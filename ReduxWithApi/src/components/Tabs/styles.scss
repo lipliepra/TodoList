@@ -1,0 +1,23 @@
+@import "../../scss/vars.scss";
+
+.tabs {
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  gap: 4px;
+
+  &__button {
+    padding: 5px 10px;
+    border: 1px solid $color-grey-2;
+    background-color: $color-white-1;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    height: 32px;
+
+    &-active {
+      background-color: $color-blue-1;
+      color: $color-white-1;
+    }
+  }
+}

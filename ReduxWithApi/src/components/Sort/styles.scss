@@ -1,0 +1,26 @@
+@import "../../scss/vars.scss";
+
+.sort {
+  display: flex;
+  gap: 4px;
+
+  &__button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color-grey-2;
+    background-color: $color-white-1;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &-active {
+      background-color: $color-blue-1;
+      
+      path {
+        fill: $color-white-1;
+      }
+    }
+  }
+}
