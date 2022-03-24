@@ -33,7 +33,7 @@ export const getTodos = (description: string) => {
     await axios.get(`localhost:5000/todos`).then((res) => {
       dispatch({ 
         type: ActionsType.GET_TODO, 
-        payload: description 
+        payload: res.data 
       });
       
       dispatch({ 
