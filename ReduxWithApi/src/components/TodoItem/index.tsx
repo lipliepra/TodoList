@@ -6,42 +6,21 @@ import { Delete, PriorityHigh, Done } from "@mui/icons-material";
 import { ITodoItemProps } from "./types";
 import "./styles.scss";
 
-const TodoItem: React.FC<ITodoItemProps> = ({
-  item,
-  setImportant,
-  setComplete,
-  setDelete,
-}) => {
-  const { id, number, description, isImportant, isComplete } = item;
+const TodoItem: React.FC<ITodoItemProps> = ({ item, setComplete, setDelete }) => {
+  const { id, title, completed } = item;
 
   return (
-    <div
-      className={cn(
-        "todoItem",
-        isImportant && "todoItem__important",
-        isComplete && "todoItem__complete"
-      )}
-    >
+    <div className={cn("todoItem", completed && "todoItem__complete")}>
       <div className="todoItem__text">
-        <h3 className="todoItem__text-title">{number}</h3>
-        <span className="todoItem__text-desc">{description}</span>
+        <h3 className="todoItem__text-title">Todo {id}</h3>
+        <span className="todoItem__text-desc">{title}</span>
       </div>
       <div className="todoItem__buttons">
-        <button
-          title="set important"
-          className="todoItem__buttons-important"
-          onClick={() => {
-            setImportant(id, isImportant);
-          }}
-          disabled={isComplete}
-        >
-          <PriorityHigh fontSize="small" />
-        </button>
         <button
           title="set complete"
           className="todoItem__buttons-complete"
           onClick={() => {
-            setComplete(id, isComplete);
+            setComplete(id);
           }}
         >
           <Done fontSize="small" />

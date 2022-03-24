@@ -1,4 +1,6 @@
 import { Dispatch } from "redux";
+import axios from "axios";
+import { BASE_URL } from "../../api";
 import { SortFilterAction, LoadingAction, TodosAction, ActionsType } from "../actionsType";
 
 export const toggleSort = (value: boolean) => {
@@ -13,6 +15,23 @@ export const toggleFilter = (value: string) => {
   };
 };
 
+export const getTodos = () => {
+  return (dispatch: Dispatch<TodosAction | LoadingAction>) => {
+    dispatch({ type: ActionsType.TOGGLE_LOADING, payload: true });
+
+    axios
+      .get(`${BASE_URL}/todos`)
+      .then((res) => {
+        dispatch({ type: ActionsType.GET_TODOS, payload: res.data });
+
+        dispatch({ type: ActionsType.TOGGLE_LOADING, payload: false });
+      })
+      .catch(() => {
+        dispatch({ type: ActionsType.TOGGLE_LOADING, payload: false });
+      });
+  };
+};
+
 export const addTodo = (description: string) => {
   return (dispatch: Dispatch<TodosAction | LoadingAction>) => {
     dispatch({ type: ActionsType.TOGGLE_LOADING, payload: true });
@@ -23,27 +42,6 @@ export const addTodo = (description: string) => {
     }, 1000);
   };
 };
-
-// Если бы был запрос на сервер, написал бы так
-/* 
-export const getTodos = (description: string) => {
-  return async (dispatch: Dispatch<TodosAction | LoadingAction>) => {
-    dispatch({ type: ActionsType.ADD_TODO, payload: description });
-
-    await axios.get(`localhost:5000/todos`).then((res) => {
-      dispatch({ 
-        type: ActionsType.GET_TODO, 
-        payload: res.data 
-      });
-      
-      dispatch({ 
-        type: ActionsType.TOGGLE_LOADING, 
-        payload: false 
-      });
-    })
-  };
-};
-*/
 
 export const deleteTodo = (id: string) => {
   return (dispatch: Dispatch<TodosAction | LoadingAction>) => {
@@ -65,12 +63,6 @@ export const deleteCompletedTodos = () => {
       dispatch({ type: ActionsType.TOGGLE_LOADING, payload: false });
       dispatch({ type: ActionsType.TOGGLE_FILTER, payload: "all" });
     }, 1000);
-  };
-};
-
-export const setImportant = (id: string) => {
-  return (dispatch: Dispatch<TodosAction>) => {
-    dispatch({ type: ActionsType.SET_IMPORTANT, payload: { id } });
   };
 };
 

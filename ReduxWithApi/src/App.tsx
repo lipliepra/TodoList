@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 
@@ -11,10 +11,10 @@ import DeleteTodos from "./components/DeleteTodos";
 import {
   toggleSort,
   toggleFilter,
+  getTodos,
   addTodo,
   deleteTodo,
   deleteCompletedTodos,
-  setImportant,
   setComplete,
 } from "./redux/actions";
 
@@ -29,6 +29,10 @@ const App: React.FC = () => {
   const filter = useSelector((state: RootState) => state.filter);
   const isLoading = useSelector((state: RootState) => state.loading);
 
+  useEffect(() => {
+    dispatch(getTodos());
+  }, [getTodos]);
+
   let list: ITodo[] = [];
 
   switch (filter) {
@@ -36,13 +40,10 @@ const App: React.FC = () => {
       list = todoList;
       break;
     case "common":
-      list = todoList.filter((todo) => todo.isComplete === false && todo.isImportant === false);
+      list = todoList.filter((todo) => todo.completed === false);
       break;
     case "completed":
-      list = todoList.filter((todo) => todo.isComplete === true);
-      break;
-    case "important":
-      list = todoList.filter((todo) => todo.isImportant === true && todo.isComplete === false);
+      list = todoList.filter((todo) => todo.completed === true);
       break;
     default:
       break;
@@ -52,8 +53,6 @@ const App: React.FC = () => {
   const setFilterHandler = (value: string) => dispatch(toggleFilter(value));
 
   const addTodoHandler = (description: string) => dispatch(addTodo(description));
-
-  const setImportantHandler = (id: string) => dispatch(setImportant(id));
   const setCompleteHandler = (id: string) => dispatch(setComplete(id));
 
   const deleteTodoHandler = (id: string) => dispatch(deleteTodo(id));
@@ -75,13 +74,7 @@ const App: React.FC = () => {
             sort={sort}
             setSort={setSortHandler}
           />
-          <TodoList
-            list={list}
-            sort={sort}
-            setImportant={setImportantHandler}
-            setComplete={setCompleteHandler}
-            setDelete={deleteTodoHandler}
-          />
+          <TodoList list={list} sort={sort} setComplete={setCompleteHandler} setDelete={deleteTodoHandler} />
           {filter === "completed" && !!list.length && <DeleteTodos onClick={deleteCompletedTodosHandler} />}
         </div>
       </div>

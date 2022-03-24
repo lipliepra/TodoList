@@ -1,14 +1,11 @@
 export type ITodoItemProps = {
   item: ITodoItem;
-  setImportant: (id: string, imp: boolean) => void;
-  setComplete: (id: string, comp: boolean) => void;
+  setComplete: (id: string) => void;
   setDelete: (id: string) => void;
 };
 
 interface ITodoItem {
   id: string;
-  number: string;
-  description: string;
-  isImportant: boolean;
-  isComplete: boolean;
+  title: string;
+  completed: boolean;
 }

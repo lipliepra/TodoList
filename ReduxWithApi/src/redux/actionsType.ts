@@ -6,6 +6,7 @@ export enum ActionsType {
   //loading
   TOGGLE_LOADING = "TOGGLE_LOADING",
   // todos
+  GET_TODOS = "GET_TODOS",
   ADD_TODO = "ADD_TODO",
   DELETE_TODO = "DELETE_TODO",
   DELETE_COMPLETED_TODOS = "DELETE_COMPLETED_TODOS",
@@ -23,6 +24,11 @@ export type LoadingAction = {
   payload: boolean;
 };
 
+interface GetTodosAction {
+  type: ActionsType.GET_TODOS;
+  payload: [];
+}
+
 interface AddTodoAction {
   type: ActionsType.ADD_TODO;
   payload: string;
@@ -37,19 +43,14 @@ interface DeleteCompletedTodosAction {
   type: ActionsType.DELETE_COMPLETED_TODOS;
 }
 
-interface SetImportantAction {
-  type: ActionsType.SET_IMPORTANT;
-  payload: { id: string };
-}
-
 interface SetCompleteAction {
   type: ActionsType.SET_COMPLETE;
   payload: { id: string };
 }
 
 export type TodosAction =
+  | GetTodosAction
   | AddTodoAction
   | DeleteTodoAction
   | DeleteCompletedTodosAction
-  | SetImportantAction
   | SetCompleteAction;

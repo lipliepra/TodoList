@@ -3,19 +3,20 @@ import { ITodo } from "../../helpers/types";
 import { testData } from "../../helpers/testData";
 import { v4 as uuidv4 } from "uuid";
 
-const initialState: ITodo[] = testData;
+const initialState: ITodo[] = [];
 
 const todosReducer = (state = initialState, action: TodosAction) => {
   const { type } = action;
 
   switch (type) {
+    case ActionsType.GET_TODOS:
+      return action.payload.slice(0, 20);
+    
     case ActionsType.ADD_TODO:
       const newTodo: ITodo = {
         id: uuidv4(),
-        number: `Task ${state.length + 1}`,
-        description: action.payload,
-        isImportant: false,
-        isComplete: false,
+        title: "",
+        completed: false,
       };
       return [...state, newTodo];
 
@@ -24,18 +25,13 @@ const todosReducer = (state = initialState, action: TodosAction) => {
       return todos;
 
     case ActionsType.DELETE_COMPLETED_TODOS:
-      const filteredTodos = state.filter((todo) => todo.isComplete === false);
+      const filteredTodos = state.filter((todo) => todo.completed === false);
       return filteredTodos;
-
-    case ActionsType.SET_IMPORTANT:
-      const isImptodo = state.find((todo) => todo.id === action.payload.id);
-      isImptodo!.isImportant = !isImptodo!.isImportant;
-      return [...state];
 
     case ActionsType.SET_COMPLETE:
       const isComptodo = state.find((todo) => todo.id === action.payload.id);
-      isComptodo!.isComplete = !isComptodo!.isComplete;
-      
+      isComptodo!.completed = !isComptodo!.completed;
+
       return [...state];
 
     default:
